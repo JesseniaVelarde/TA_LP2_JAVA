@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
+
 public class ClienteDA {
     Connection cnx=null;
     //ConexionMySql mysql;
