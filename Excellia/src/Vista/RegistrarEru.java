@@ -84,49 +84,48 @@ public class RegistrarEru extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblTituloRegistrar = new javax.swing.JLabel();
+        lblnomproyReg = new javax.swing.JLabel();
+        lblNomEmpRegistrar = new javax.swing.JLabel();
+        lblObjReqRegistrar = new javax.swing.JLabel();
         txtNomProyecto = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         btnListo = new javax.swing.JButton();
         cboxEmpresa = new javax.swing.JComboBox<>();
         cboxObjetivos = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        lblFechaRegistrar = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablaErus = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
+        tablaErusRegistrar = new javax.swing.JTable();
+        lblReqRegistrar = new javax.swing.JLabel();
         txtrequerimiento = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        btnAgregarReg = new javax.swing.JButton();
         cboxprioridad = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        lblPrioridadRegistrar = new javax.swing.JLabel();
+        btnEliminarReg = new javax.swing.JButton();
+        lbl100regustrar = new javax.swing.JLabel();
+        jDateFechaRegistrar = new com.toedter.calendar.JDateChooser();
+        jpanelProyRegistrar = new javax.swing.JPanel();
+        cboxtipoRequerimientoRegistrar = new javax.swing.JComboBox<>();
+        lblTipoReqReguistrat = new javax.swing.JLabel();
+        jPanelRequerimientoModificar = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Registrar Especificación de Requerimiento de Usuario");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 27, 634, 39));
+        lblTituloRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblTituloRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloRegistrar.setText("Registrar Especificación de Requerimiento de Usuario");
+        add(lblTituloRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 634, 39));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setText("Datos Generales del Proyecto");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 231, 31));
+        lblnomproyReg.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblnomproyReg.setText("Nombre del Proyecto:");
+        add(lblnomproyReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 115, 151, 26));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("Nombre del Proyecto:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 115, 151, 26));
+        lblNomEmpRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblNomEmpRegistrar.setText("Empresa/Negocios:");
+        add(lblNomEmpRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 151, 26));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Empresa/Negocios:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 151, 26));
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("Objetivo del Requerimiento:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 180, 31));
+        lblObjReqRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblObjReqRegistrar.setText("Objetivo del Requerimiento:");
+        add(lblObjReqRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 180, 31));
 
         txtNomProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,10 +133,6 @@ public class RegistrarEru extends javax.swing.JPanel {
             }
         });
         add(txtNomProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 115, 310, 26));
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setText("Descripción de los Requerimientos");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 31));
 
         btnListo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Send.png"))); // NOI18N
         btnListo.setBorderPainted(false);
@@ -147,7 +142,7 @@ public class RegistrarEru extends javax.swing.JPanel {
                 btnListoActionPerformed(evt);
             }
         });
-        add(btnListo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 149, 46));
+        add(btnListo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 149, 46));
 
         add(cboxEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 310, -1));
 
@@ -158,11 +153,11 @@ public class RegistrarEru extends javax.swing.JPanel {
         });
         add(cboxObjetivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 310, -1));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("Fecha Estimada:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        lblFechaRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblFechaRegistrar.setText("Fecha Estimada:");
+        add(lblFechaRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
 
-        tablaErus.setModel(new javax.swing.table.DefaultTableModel(
+        tablaErusRegistrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -170,23 +165,28 @@ public class RegistrarEru extends javax.swing.JPanel {
                 "Requerimiento", "Prioridad"
             }
         ));
-        jScrollPane3.setViewportView(tablaErus);
+        jScrollPane3.setViewportView(tablaErusRegistrar);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 680, 140));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 680, 140));
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        jLabel9.setText("Requerimiento:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
+        lblReqRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        lblReqRegistrar.setText("Requerimiento:");
+        add(lblReqRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
         txtrequerimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtrequerimientoActionPerformed(evt);
             }
         });
-        add(txtrequerimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 430, -1));
+        add(txtrequerimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 430, -1));
 
-        btnAgregar.setText("Agregar");
-        add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, -1));
+        btnAgregarReg.setText("Agregar");
+        btnAgregarReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarRegActionPerformed(evt);
+            }
+        });
+        add(btnAgregarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
 
         cboxprioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
         cboxprioridad.addActionListener(new java.awt.event.ActionListener() {
@@ -194,18 +194,31 @@ public class RegistrarEru extends javax.swing.JPanel {
                 cboxprioridadActionPerformed(evt);
             }
         });
-        add(cboxprioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, -1, -1));
+        add(cboxprioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        jLabel8.setText("Prioridad:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+        lblPrioridadRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        lblPrioridadRegistrar.setText("Prioridad:");
+        add(lblPrioridadRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
-        btnEliminar.setText("Eliminar");
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, -1, -1));
+        btnEliminarReg.setText("Eliminar");
+        add(btnEliminarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 10)); // NOI18N
-        jLabel10.setText("[100 caracteres]");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
+        lbl100regustrar.setFont(new java.awt.Font("Times New Roman", 1, 10)); // NOI18N
+        lbl100regustrar.setText("[100 caracteres]");
+        add(lbl100regustrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, -1, -1));
+        add(jDateFechaRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 310, -1));
+
+        jpanelProyRegistrar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos Generales del Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 11))); // NOI18N
+        add(jpanelProyRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 700, 160));
+
+        add(cboxtipoRequerimientoRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 140, -1));
+
+        lblTipoReqReguistrat.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        lblTipoReqReguistrat.setText("Tipo Requerimiento:");
+        add(lblTipoReqReguistrat, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
+
+        jPanelRequerimientoModificar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Descripción de Requerimientos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 11))); // NOI18N
+        add(jPanelRequerimientoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 610, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListoActionPerformed
@@ -245,10 +258,6 @@ public class RegistrarEru extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxObjetivosActionPerformed
 
-    private void txtrequerimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrequerimientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtrequerimientoActionPerformed
-
     private void cboxprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxprioridadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxprioridadActionPerformed
@@ -258,26 +267,37 @@ public class RegistrarEru extends javax.swing.JPanel {
        
     }//GEN-LAST:event_txtNomProyectoActionPerformed
 
+    private void txtrequerimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrequerimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrequerimientoActionPerformed
+
+    private void btnAgregarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarRegActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnAgregarReg;
+    private javax.swing.JButton btnEliminarReg;
     private javax.swing.JButton btnListo;
     private javax.swing.JComboBox<String> cboxEmpresa;
     private javax.swing.JComboBox<String> cboxObjetivos;
     private javax.swing.JComboBox<String> cboxprioridad;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> cboxtipoRequerimientoRegistrar;
+    private com.toedter.calendar.JDateChooser jDateFechaRegistrar;
+    private javax.swing.JPanel jPanelRequerimientoModificar;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tablaErus;
+    private javax.swing.JPanel jpanelProyRegistrar;
+    private javax.swing.JLabel lbl100regustrar;
+    private javax.swing.JLabel lblFechaRegistrar;
+    private javax.swing.JLabel lblNomEmpRegistrar;
+    private javax.swing.JLabel lblObjReqRegistrar;
+    private javax.swing.JLabel lblPrioridadRegistrar;
+    private javax.swing.JLabel lblReqRegistrar;
+    private javax.swing.JLabel lblTipoReqReguistrat;
+    private javax.swing.JLabel lblTituloRegistrar;
+    private javax.swing.JLabel lblnomproyReg;
+    private javax.swing.JTable tablaErusRegistrar;
     private javax.swing.JTextField txtNomProyecto;
     private javax.swing.JTextField txtrequerimiento;
     // End of variables declaration//GEN-END:variables
