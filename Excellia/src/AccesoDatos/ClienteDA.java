@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package AccesoDatos;
+import Modelo.Dominio;
 import Modelo.Empresa;
 import Modelo.Eru;
 import Modelo.Objetivo;
@@ -148,13 +149,14 @@ public class ClienteDA {
                 int idObj=rs.getInt("ID_OBJETIVO");
                 String descripcion=rs.getString("DESCRIPCION");
 
-                Objetivo obj=new Objetivo(idObj,descripcion);
+                Objetivo obj = new Objetivo();
+                obj.setIdObjetivo(idObj);
+                obj.setDescripcion(descripcion);
                 Listaobj.add(obj);
             }
-            cnx.close();
-            //return Listaobj;
-        }catch(SQLException ex){
-            
+            cnx.close();            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
         return Listaobj;
     }
