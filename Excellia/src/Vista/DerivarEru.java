@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import LogicaNegocio.DominioBL;
+import Modelo.Dominio;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,6 +22,7 @@ public class DerivarEru extends javax.swing.JPanel {
      */
     KAM x;
     JPanel panelPrincipal;
+    DominioBL dom = new DominioBL();
     public DerivarEru() {
         initComponents();
     }
@@ -32,6 +36,16 @@ public class DerivarEru extends javax.swing.JPanel {
         initComponents();
         x = k;
         panelPrincipal = p;
+        //dom = new DominioBL();
+        try{            
+            ArrayList<Dominio> dominio = new ArrayList<Dominio>();
+            dominio = dom.listaDominios();
+            for (int i = 0; i < dominio.size(); i++) {
+                cboDominio.addItem(dominio.get(i).getDenominacion());
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }      
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +67,7 @@ public class DerivarEru extends javax.swing.JPanel {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboDominio = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -94,12 +108,12 @@ public class DerivarEru extends javax.swing.JPanel {
         jTextField5.setEditable(false);
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 228, -1));
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cboDominio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cboDominioActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 321, 228, -1));
+        jPanel1.add(cboDominio, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 321, 228, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Yes.png"))); // NOI18N
         jButton1.setBorderPainted(false);
@@ -154,15 +168,15 @@ public class DerivarEru extends javax.swing.JPanel {
         new CambiaPanel(panelPrincipal, new HomeKAM());
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cboDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDominioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cboDominioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboDominio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
