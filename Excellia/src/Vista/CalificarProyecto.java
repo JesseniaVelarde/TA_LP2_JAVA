@@ -21,6 +21,7 @@ public class CalificarProyecto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
         this.setTitle("Calificar Proyecto");
+        //kjcvn
     }
 
     /**
