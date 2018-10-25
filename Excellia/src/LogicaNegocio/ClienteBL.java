@@ -52,4 +52,11 @@ public class ClienteBL {
     public ArrayList<Proyecto> listar(String idp){
         return clienteDA.listar(idp);
     }
+    
+    public void registrarLineaEsimacion(String id_eru,String descrip ,String fechaR,
+            String id_tipoReq,String fechaE,String prioridad){
+        //clienteDA.RegistrarERU(id_eru, descrip, fechaR, id_tipoReq, fechaE, prioridad);
+    }
+    
+    
 }

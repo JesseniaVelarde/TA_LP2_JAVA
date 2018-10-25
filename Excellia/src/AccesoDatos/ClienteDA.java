@@ -20,7 +20,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,6 +75,64 @@ public class ClienteDA {
         }catch(Exception ex){
         
         }    
+    }
+    
+    public void RegistrarEru(Eru e,String id_cli, String nomEru,String Obj){
+    
+        cnx=conexion();
+        String sql;
+        try{
+            sql="INSERT INTO ERU(ID_ERU,ID_KAM,ID_CLIENTE,DESCRIPCION,FECHA_SOLICITUD,ESTADO,EVALUACION_KAM,EVALUACION_EXPERTO,ID_OBJETIVO)\n" +
+                    "VALUES(19,2,?,?,?,2,2,2,?);";
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setString(2,id_cli);
+            ps.setString(3, nomEru);
+            
+            Calendar fecha = new GregorianCalendar();
+
+            int ano = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            
+            
+            String anoS = Integer.toString(ano);
+            String mesS = Integer.toString(mes);
+            String diaS=Integer.toString(dia);
+            
+            String fechaS=anoS+mesS+diaS;
+            
+            ps.setString(4, fechaS);
+            ps.setString(8, Obj);
+            
+            
+        }catch(Exception ex){
+        
+        }
+    }
+    
+    
+        
+    public void RegistrarRequerimientos(String id_eru,String descrip ,String fechaR,
+            String id_tipoReq,String fechaE,String prioridad) {
+        cnx=conexion();
+        
+        String sql;
+        try{
+            sql="INSERT INTO REQUERIMIENTO(ID_REQUERIMIENTO,ID_ERU,DESCRIPCION, FECHA_REQUERIMIENTO,"
+                    + "ID_TIPO_REQUERIMIENTO,FECHA_ESTIMADA,PRIORIDAD)\n" +
+                        " VALUES(4,?,?,?,?,?,?);";
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setString(1,id_eru);
+            ps.setString(2,descrip);
+            ps.setString(3,fechaR);
+            ps.setString(4,id_tipoReq);
+            ps.setString(5,fechaE);
+            ps.setString(6,prioridad);
+            ps.executeUpdate();
+            cnx.close();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
     
     
