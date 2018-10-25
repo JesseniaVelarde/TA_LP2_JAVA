@@ -14,6 +14,7 @@ import Modelo.Requerimiento;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +25,7 @@ public class RegistrarEru extends javax.swing.JPanel {
     /**
      * Creates new form RegistrarEru
      */
+    DefaultTableModel modelo = new DefaultTableModel();
     private ClienteBL clientebl;
     JPanel panelPrincipal;
     Cliente cliente;
@@ -70,9 +72,27 @@ public class RegistrarEru extends javax.swing.JPanel {
                 cboxEmpresa.addItem(e.get(i).getRazonSocial());
                 //System.out.println(e.get(i).getRazonSocial());
             }
+            
+            ArrayList<String> e1 = new ArrayList<String>();
+            e1 = clientebl.listaTipoRequerimiento();
+            for (int i = 0; i < e1.size(); i++) {
+                cboxtipoRequerimientoRegistrar.addItem(e1.get(i));
+                //System.out.println(e.get(i).getRazonSocial());
+            }
+            
+            ArrayList<String> e2 = new ArrayList<String>();
+            e2 = clientebl.listaPrioridad();
+            for (int i = 0; i < e2.size(); i++) {
+                cboxprioridad.addItem(e2.get(i));
+                //System.out.println(e.get(i).getRazonSocial());
+            }           
         }catch(Exception ex){
         
         }        
+        modelo.addColumn("Requerimiento");
+        modelo.addColumn("Prioridad");
+        modelo.addColumn("Tipo Requerimiento");
+        tablaErusRegistrar.setModel(modelo);
     }
 
     /**
@@ -144,6 +164,11 @@ public class RegistrarEru extends javax.swing.JPanel {
         });
         add(btnListo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 149, 46));
 
+        cboxEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxEmpresaActionPerformed(evt);
+            }
+        });
         add(cboxEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 310, -1));
 
         cboxObjetivos.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +187,7 @@ public class RegistrarEru extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Requerimiento", "Prioridad"
+
             }
         ));
         jScrollPane3.setViewportView(tablaErusRegistrar);
@@ -188,7 +213,6 @@ public class RegistrarEru extends javax.swing.JPanel {
         });
         add(btnAgregarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
 
-        cboxprioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
         cboxprioridad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxprioridadActionPerformed(evt);
@@ -201,6 +225,11 @@ public class RegistrarEru extends javax.swing.JPanel {
         add(lblPrioridadRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         btnEliminarReg.setText("Eliminar");
+        btnEliminarReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarRegActionPerformed(evt);
+            }
+        });
         add(btnEliminarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, -1, -1));
 
         lbl100regustrar.setFont(new java.awt.Font("Times New Roman", 1, 10)); // NOI18N
@@ -244,7 +273,7 @@ public class RegistrarEru extends javax.swing.JPanel {
             int id=e.getIdERU();
             //req.setEru(id);
             //req.setDescripcion(a);
-            e.setRequerimiento(req);
+            //e.setRequerimiento(req);
             
             
             clientebl.RegistrarEru(e);
@@ -273,7 +302,30 @@ public class RegistrarEru extends javax.swing.JPanel {
 
     private void btnAgregarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRegActionPerformed
         // TODO add your handling code here:
+        Requerimiento req;
+        String Dato[] = new String[3];
+        Dato[0] = txtrequerimiento.getText();
+        Dato[1] = (String)cboxprioridad.getSelectedItem();
+        Dato[2] = (String)cboxtipoRequerimientoRegistrar.getSelectedItem();
+        modelo.addRow(Dato);
+        txtrequerimiento.setText("");
+        cboxprioridad.setSelectedIndex(-1);
+        cboxtipoRequerimientoRegistrar.setSelectedIndex(-1);
     }//GEN-LAST:event_btnAgregarRegActionPerformed
+
+    private void cboxEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboxEmpresaActionPerformed
+
+    private void btnEliminarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRegActionPerformed
+        // TODO add your handling code here:
+        int FilaSelec = tablaErusRegistrar.getSelectedRow();
+        if(FilaSelec>=0){
+            modelo.removeRow(FilaSelec);
+        }else{
+            JOptionPane.showMessageDialog(this, "Fila No Seleccionada");
+        }
+    }//GEN-LAST:event_btnEliminarRegActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

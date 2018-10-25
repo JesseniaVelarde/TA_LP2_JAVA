@@ -6,8 +6,13 @@
 package Vista;
 
 import LogicaNegocio.ClienteBL;
+import Modelo.Proyecto;
+import Modelo.Requerimiento;
+import Modelo.TipoRequerimiento;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +23,11 @@ public class ModificarEru extends javax.swing.JPanel {
     /**
      * Creates new form ModificarEru
      */
+    DefaultTableModel modelo = new DefaultTableModel();    
     Cliente x;
     JPanel panelPrincipal;
     String id;
+    private Proyecto proy;
     private ClienteBL clientebl;
     private Cliente objseleccionado;
 
@@ -40,6 +47,26 @@ public class ModificarEru extends javax.swing.JPanel {
         x = c;
         panelPrincipal = d;
         this.id = id;
+        clientebl=new ClienteBL();
+        
+        ArrayList<String> e1 = new ArrayList<String>();
+            e1 = clientebl.listaTipoRequerimiento();
+            for (int i = 0; i < e1.size(); i++) {
+                cboxtipoRequerimientoModificar.addItem(e1.get(i));
+                //System.out.println(e.get(i).getRazonSocial());
+            }
+            
+            ArrayList<String> e2 = new ArrayList<String>();
+            e2 = clientebl.listaPrioridad();
+            for (int i = 0; i < e2.size(); i++) {
+                cboxprioridadmodificar.addItem(e2.get(i));
+                //System.out.println(e.get(i).getRazonSocial());
+            }
+            
+        modelo.addColumn("Requerimiento");
+        modelo.addColumn("Prioridad");
+        modelo.addColumn("Tipo Requerimiento");
+        tablaErusmodificar.setModel(modelo);            
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +138,8 @@ public class ModificarEru extends javax.swing.JPanel {
         lblObjetivoReqModificar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblObjetivoReqModificar.setText("Objetivo del Requerimiento:");
         add(lblObjetivoReqModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 151, -1, -1));
+
+        txtobjetivomodificar.setEditable(false);
         add(txtobjetivomodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 150, 207, -1));
 
         lblFechaModificar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -122,12 +151,12 @@ public class ModificarEru extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Requerimiento", "Prioridad"
+
             }
         ));
         jScrollPane3.setViewportView(tablaErusmodificar);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 680, 140));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 690, 140));
 
         lblRequerimientoModificar.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         lblRequerimientoModificar.setText("Requerimiento:");
@@ -144,7 +173,6 @@ public class ModificarEru extends javax.swing.JPanel {
         lblPrioridadModificar.setText("Prioridad:");
         add(lblPrioridadModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
 
-        cboxprioridadmodificar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
         cboxprioridadmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxprioridadmodificarActionPerformed(evt);
@@ -153,12 +181,27 @@ public class ModificarEru extends javax.swing.JPanel {
         add(cboxprioridadmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
 
         btnAgregarmod.setText("Agregar");
+        btnAgregarmod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarmodActionPerformed(evt);
+            }
+        });
         add(btnAgregarmod, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 90, -1));
 
         btnmodificarmod.setText("Modificar");
+        btnmodificarmod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarmodActionPerformed(evt);
+            }
+        });
         add(btnmodificarmod, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 90, -1));
 
         btnEliminarmod.setText("Eliminar");
+        btnEliminarmod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarmodActionPerformed(evt);
+            }
+        });
         add(btnEliminarmod, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, 90, -1));
 
         lbl100modificar.setFont(new java.awt.Font("Times New Roman", 1, 10)); // NOI18N
@@ -191,9 +234,28 @@ public class ModificarEru extends javax.swing.JPanel {
 
     private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
         // TODO add your handling code here:
-        new BuscarEruCliente(x,true,id).setVisible(true);
+        //new BuscarEruCliente(x,true,id).setVisible(true);
+        BuscarEruCliente frm = new BuscarEruCliente(x,true,id);
+        frm.setVisible(true);
+        proy = frm.proy;
+        txtnomproyModificar.setText(proy.getNombre());
+        txtobjetivomodificar.setText(proy.getEru().getObj().getDescripcion());
+       
+        Requerimiento req;
         
-        
+        ArrayList<Requerimiento>lReq=proy.getEru().getListaRequerimiento();
+        for (int i=0;i<lReq.size();i++){
+            String Dato[] = new String[3];
+            Dato[0] = lReq.get(i).getDescripcion();
+            if(lReq.get(i).getPrioridad()==1)Dato[1]="BAJA";
+            if(lReq.get(i).getPrioridad()==2)Dato[1]="MEDIA";
+            if(lReq.get(i).getPrioridad()==3)Dato[1]="ALTA";
+            
+            if(lReq.get(i).getTipo()==TipoRequerimiento.FUNCIONAL)Dato[2]="FUNCIONAL";
+            if(lReq.get(i).getTipo()==TipoRequerimiento.NO_FUNCIONAL)Dato[2]="NO_FUNCIONAL";
+            
+            modelo.addRow(Dato);
+        }
     }//GEN-LAST:event_btnBuscarModificarActionPerformed
 
     private void txtrequerimientomodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrequerimientomodificarActionPerformed
@@ -203,6 +265,44 @@ public class ModificarEru extends javax.swing.JPanel {
     private void cboxprioridadmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxprioridadmodificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxprioridadmodificarActionPerformed
+
+    private void btnEliminarmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarmodActionPerformed
+        // TODO add your handling code here:
+        int FilaSelec = tablaErusmodificar.getSelectedRow();
+        if(FilaSelec>=0){
+            modelo.removeRow(FilaSelec);
+        }else{
+            JOptionPane.showMessageDialog(this, "Fila No Seleccionada");
+        }        
+    }//GEN-LAST:event_btnEliminarmodActionPerformed
+
+    private void btnAgregarmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarmodActionPerformed
+        // TODO add your handling code here:
+        Requerimiento req;
+        String Dato[] = new String[3];
+        Dato[0] = txtrequerimientomodificar.getText();
+        Dato[1] = (String)cboxprioridadmodificar.getSelectedItem();
+        Dato[2] = (String)cboxtipoRequerimientoModificar.getSelectedItem();
+        modelo.addRow(Dato);
+        txtrequerimientomodificar.setText("");
+        cboxprioridadmodificar.setSelectedIndex(-1);
+        cboxtipoRequerimientoModificar.setSelectedIndex(-1);        
+    }//GEN-LAST:event_btnAgregarmodActionPerformed
+
+    private void btnmodificarmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarmodActionPerformed
+        // TODO add your handling code here:
+        int FilaSelec = tablaErusmodificar.getSelectedRow();
+        if(FilaSelec >= 0){
+            txtrequerimientomodificar.setText(tablaErusmodificar.getValueAt(FilaSelec,0).toString());
+            cboxprioridadmodificar.setSelectedItem(tablaErusmodificar.getValueAt(FilaSelec, 1).toString());
+            cboxtipoRequerimientoModificar.setSelectedItem(tablaErusmodificar.getValueAt(FilaSelec, 2).toString());
+            
+            modelo.removeRow(FilaSelec);
+        }else{
+            JOptionPane.showMessageDialog(this, "Fila No Seleccionada");
+        }
+        
+    }//GEN-LAST:event_btnmodificarmodActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

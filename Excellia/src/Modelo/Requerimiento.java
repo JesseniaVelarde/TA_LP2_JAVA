@@ -5,6 +5,7 @@ public class Requerimiento {
     private String descripcion;
     private Date fechaRequerimiento;
     private TipoRequerimiento tipo;
+    private int prioridad;
     private Eru eru;
     private Estimacion estimacion;
 
@@ -17,6 +18,12 @@ public class Requerimiento {
         this.descripcion=descripcion;
         this.fechaRequerimiento=fechaRequerimiento;
         this.tipo=tipo;
+    }
+    public int getPrioridad(){
+        return prioridad;
+    }
+    public void setPrioridad(int prioridad){
+        this.prioridad = prioridad;
     }
     
     public int getIdRequerimiento() {
@@ -66,4 +73,8 @@ public class Requerimiento {
     public void setEstimacion(Estimacion estimacion) {
         this.estimacion = estimacion;
     }      
+    public void setTipoRequerimiento(String tipo){
+        if(tipo.equals("FUNCIONAL"))this.tipo = TipoRequerimiento.FUNCIONAL;
+        if(tipo.equals("NO_FUNCIONAL"))this.tipo = TipoRequerimiento.NO_FUNCIONAL;
+    }
 }

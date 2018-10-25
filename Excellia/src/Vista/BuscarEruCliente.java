@@ -6,12 +6,23 @@
 package Vista;
 
 import LogicaNegocio.ClienteBL;
+import Modelo.Eru;
+import Modelo.JefeProyecto;
+import Modelo.Proyecto;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BuscarEruCliente extends javax.swing.JDialog {
 
    ClienteBL cliente=new ClienteBL();
    String id;
+   Proyecto proy;
    private Cliente objseleccionado;
 
     public Cliente getObjseleccionado() {
@@ -127,10 +138,33 @@ public class BuscarEruCliente extends javax.swing.JDialog {
         //if(JOptionPane.showConfirmDialog(null, rpta,
           //  "ADVERTENCIA",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
         //JOptionPane.showMessageDialog(null,"Se tomaron correctamente los datos");
+        int FilaSelec = tabla_eru_busqueda.getSelectedRow();
+        ArrayList<Proyecto>listaProyectos = new ArrayList<Proyecto>();
+        listaProyectos = cliente.listar(id);
+        proy = listaProyectos.get(FilaSelec);
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+        proy= new Proyecto();
+        proy.setNombre(tabla_eru_busqueda.getValueAt(FilaSelec, 0).toString());
+        try {
+           proy.setFechaFinEstimada(formatter.parse(tabla_eru_busqueda.getValueAt(FilaSelec, 1).toString()));
+        } catch (ParseException ex) {
+           Logger.getLogger(BuscarEruCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Eru e = new Eru();
+        e.setEstadoString(tabla_eru_busqueda.getValueAt(FilaSelec, 2).toString());        
+        proy.setTipoFase(tabla_eru_busqueda.getValueAt(FilaSelec, 3).toString());
+        JefeProyecto jf = new JefeProyecto();
+        jf.setNombre(tabla_eru_busqueda.getValueAt(FilaSelec, 4).toString());        
+        e.setObjString(tabla_eru_busqueda.getValueAt(FilaSelec,5).toString());
+        proy.setEru(e);
+        proy.setJefeProyecto(jf);*/
         dispose();
         //}
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private Proyecto getProyecto(){
+        return proy;
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();

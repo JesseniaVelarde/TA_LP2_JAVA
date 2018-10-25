@@ -9,6 +9,9 @@ import Modelo.Empresa;
 import Modelo.Eru;
 import Modelo.Objetivo;
 import Modelo.Proyecto;
+import Modelo.*;
+//import Modelo.Enumerados;
+import Modelo.Requerimiento;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -52,7 +55,7 @@ public class ClienteDA {
                         "AND PRO.ID_TRABAJADOR_JEFE = T.ID_TRABAJADOR AND E.ID_CLIENTE = ?";
            PreparedStatement ps = cnx.prepareStatement(query);
            ps.setString(1, p);
-            ResultSet rs = ps.executeQuery();
+           ResultSet rs = ps.executeQuery();
            ResultSetMetaData rsmd = rs.getMetaData();
            int col = rsmd.getColumnCount();
            DefaultTableModel modelo = new DefaultTableModel();
@@ -107,30 +110,31 @@ public class ClienteDA {
     public void tabla_eru_busqueda(JTable tabla,String id) {
         cnx=conexion();
         try{            
-            String query="SELECT PRO.NOMBRE NOMBRE_PROYECTO,PRO.FECHA_FIN_ESTIMADA FECHA_FIN,TE.DESCRIPCION ESTADO,TIP.DESCRIPCION TIPO_FASE,P.NOMBRE NOMBRE_JEFE\n" +
-"FROM PROYECTO PRO,ERU E,PERSONA P, TRABAJADOR T, TIPO_FASE_PROYECTO TIP,TIPO_ESTADO_SOLICITUD TE\n" +
+            String query="SELECT PRO.NOMBRE NOMBRE_PROYECTO,PRO.FECHA_FIN_ESTIMADA FECHA_FIN,TE.DESCRIPCION ESTADO,TIP.DESCRIPCION TIPO_FASE,P.NOMBRE NOMBRE_JEFE,O.DESCRIPCION\n" +
+"FROM PROYECTO PRO,ERU E,PERSONA P, TRABAJADOR T, TIPO_FASE_PROYECTO TIP,TIPO_ESTADO_SOLICITUD TE,OBJETIVO O\n" +
 "WHERE PRO.ID_ERU = E.ID_ERU AND P.ID_PERSONA = T.ID_PERSONA AND T.ID_TIPO = 4\n" +
 "AND PRO.ID_TIPO_FASE_PROYECTO = TIP.ID_TIPO_FASE_PROYECTO AND (TIP.ID_TIPO_FASE_PROYECTO=1 or TIP.ID_TIPO_FASE_PROYECTO=2) \n" +
-"AND E.ESTADO=TE.ID_TIPO_ESTADO_SOLICITUD AND E.ID_CLIENTE=? AND PRO.ID_TRABAJADOR_JEFE=T.ID_TRABAJADOR; ";
+"AND E.ESTADO=TE.ID_TIPO_ESTADO_SOLICITUD AND E.ID_CLIENTE=? AND PRO.ID_TRABAJADOR_JEFE=T.ID_TRABAJADOR AND \n"
+                    + "O.ID_OBJETIVO = E.ID_OBJETIVO; ";
             PreparedStatement ps=cnx.prepareStatement(query);
             ps.setString(1,id);
             ResultSet rs = ps.executeQuery();
-           ResultSetMetaData rsmd = rs.getMetaData();
-           int col = rsmd.getColumnCount();
-           DefaultTableModel modelo = new DefaultTableModel();
-           for(int i=1;i<=col;i++){modelo.addColumn(rsmd.getColumnLabel(i));}
-           while(rs.next()){
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            DefaultTableModel modelo = new DefaultTableModel();
+            for(int i=1;i<=col;i++){modelo.addColumn(rsmd.getColumnLabel(i));}
+            while(rs.next()){
                String fila[]=new String[col];
                for(int j=0;j<col;j++){
                    fila[j]=rs.getString(j+1);
                }
                modelo.addRow(fila);
-           }
-           tabla.setModel(modelo);
-           rs.close();
-           cnx.close();
+            }
+            tabla.setModel(modelo);
+            rs.close();
+            cnx.close();
         }catch(Exception ex){
-        
+            System.out.println(ex.getMessage());
         }    
     }
     
@@ -160,6 +164,54 @@ public class ClienteDA {
         }
         return Listaobj;
     }
+    
+    public ArrayList<String> listaTipoRequerimiento() {
+        
+        cnx=conexion();
+        
+        ArrayList<String> ListaReq =new ArrayList<String>();
+        try{
+            Statement sentencia=cnx.createStatement();
+            String query="SELECT * FROM TIPO_REQUERIMIENTO;";
+            ResultSet rs= sentencia.executeQuery(query);
+            while(rs.next()){
+                String descripcion=rs.getString("DESCRIPCION");
+                //TipoRequerimiento tipo_req = descripcion;
+
+                Requerimiento req = new Requerimiento();
+                if(descripcion=="FUNCIONAL")req.setTipo(TipoRequerimiento.FUNCIONAL);
+                if(descripcion=="NO FUNCIONAL")req.setTipo(TipoRequerimiento.NO_FUNCIONAL);
+                
+                ListaReq.add(descripcion);
+            }
+            cnx.close();            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return ListaReq;
+    }
+    
+   
+    public ArrayList<String> listaPrioridad() {
+        
+        cnx=conexion();
+        
+        ArrayList<String> ListaPri =new ArrayList<String>();
+        try{
+            Statement sentencia=cnx.createStatement();
+            String query="SELECT * FROM PRIORIDAD;";
+            ResultSet rs= sentencia.executeQuery(query);
+            while(rs.next()){
+                String descripcion=rs.getString("DESCRIPCION");
+                ListaPri.add(descripcion);
+            }
+            cnx.close();            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return ListaPri;
+    }
+    
     
     public ArrayList<Empresa> listarEmpresa() {
       
@@ -219,4 +271,58 @@ public class ClienteDA {
             
         }
     }
+    
+    public ArrayList<Proyecto> listar(String idp) {
+        cnx=conexion();
+        ArrayList<Proyecto> lProy=new ArrayList<Proyecto>();                 
+        try{            
+            String query="SELECT PRO.ID_PROYECTO ID_PROYECTO, PRO.NOMBRE NOMBRE_PROYECTO,PRO.FECHA_FIN_ESTIMADA FECHA_FIN,TE.DESCRIPCION ESTADO,TIP.DESCRIPCION TIPO_FASE,P.NOMBRE NOMBRE_JEFE,O.DESCRIPCION DESCRIPCION, O.ID_OBJETIVO ID_OBJETIVO\n" +
+"FROM PROYECTO PRO,ERU E,PERSONA P, TRABAJADOR T, TIPO_FASE_PROYECTO TIP,TIPO_ESTADO_SOLICITUD TE,OBJETIVO O\n" +
+"WHERE PRO.ID_ERU = E.ID_ERU AND P.ID_PERSONA = T.ID_PERSONA AND T.ID_TIPO = 4\n" +
+"AND PRO.ID_TIPO_FASE_PROYECTO = TIP.ID_TIPO_FASE_PROYECTO AND (TIP.ID_TIPO_FASE_PROYECTO=1 or TIP.ID_TIPO_FASE_PROYECTO=2) \n" +
+"AND E.ESTADO=TE.ID_TIPO_ESTADO_SOLICITUD AND E.ID_CLIENTE=? AND PRO.ID_TRABAJADOR_JEFE=T.ID_TRABAJADOR AND \n"
+                    + "O.ID_OBJETIVO = E.ID_OBJETIVO; ";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setString(1,idp);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                Proyecto pro = new Proyecto();
+                int id_pro = rs.getInt("ID_PROYECTO"); pro.setIdProyecto(id_pro);
+                String id = Integer.toString(id_pro);
+                String nombre = rs.getString("NOMBRE_PROYECTO"); pro.setNombre(nombre);
+                Objetivo obj = new Objetivo();
+                int id_obj = rs.getInt("ID_OBJETIVO"); obj.setIdObjetivo(id_obj);
+                String desc = rs.getString("DESCRIPCION"); obj.setDescripcion(desc);
+                Eru eru = new Eru();
+                eru.setObj(obj);
+                Date fecha_fin_estimada = rs.getDate("FECHA_FIN"); pro.setFechaFinEstimada(fecha_fin_estimada);
+                String query2 = "SELECT P.DESCRIPCION PRIORIDAD, TP.DESCRIPCION TIPO_REQUERIMIENTO, R.DESCRIPCION DESCRIPCION\n"+
+                        "FROM PRIORIDAD P, REQUERIMIENTO R, TIPO_REQUERIMIENTO TP, ERU E\n"+
+                        "WHERE E.ID_ERU = R.ID_ERU AND R.PRIORIDAD = P.ID_PRIORIDAD AND R.ID_TIPO_REQUERIMIENTO = TP.ID_TIPO_REQUERIMIENTO\n"+
+                        "AND R.ID_ERU = ?";
+                PreparedStatement ps2=cnx.prepareStatement(query2);
+                ps2.setString(1,id);                
+                ArrayList<Requerimiento> listaReq = new ArrayList<Requerimiento>();                
+                ResultSet rs2 = ps2.executeQuery();                
+                while(rs2.next()){
+                    Requerimiento r = new Requerimiento();
+                    String descripcion = rs2.getString("DESCRIPCION"); r.setDescripcion(descripcion);
+                    String prio = rs2.getString("PRIORIDAD"); 
+                    if(prio.equals("BAJA"))r.setPrioridad(1);
+                    if(prio.equals("MEDIA"))r.setPrioridad(2);
+                    if(prio.equals("ALTA"))r.setPrioridad(3);
+                    String tipoReq = rs2.getString("TIPO_REQUERIMIENTO"); r.setTipoRequerimiento(tipoReq);
+                    listaReq.add(r);
+                }      
+                eru.setListaRequerimiento(listaReq);
+                pro.setEru(eru);
+                lProy.add(pro);
+            }
+            cnx.close();            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return lProy;            
+    }
 }
+

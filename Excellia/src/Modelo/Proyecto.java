@@ -14,7 +14,7 @@ public class Proyecto {
     private ArrayList<Operario> listaOperario;
     private Eru eru;
     private ArrayList<SolicitudRetiro>listaSolicitudRetiro;
-
+    
     public Proyecto(){
         this.listaDetalleEntrega=new ArrayList<DetalleEntrega>();
         this.listaOperario=new ArrayList<Operario>();
@@ -142,4 +142,25 @@ public class Proyecto {
     public void setListaSolicitudRetiro(ArrayList<SolicitudRetiro> listaSolicitudRetiro) {
         this.listaSolicitudRetiro = listaSolicitudRetiro;
     }    
+    public void setNombreJefe(String nombreJefe){
+        JefeProyecto e = new JefeProyecto();
+        e.setNombre(nombreJefe);
+        this.jefeProyecto = e;
+    }    
+    public String getNombreJefe(){
+        return jefeProyecto.getNombre();
+    }
+    
+    public int getEstado(){
+        return eru.getEstado();
+    }
+    public void setTipoFase(String fase){
+        if(fase.equals("ANALISIS"))this.etapa = TipoFaseProyecto.ANALISIS;
+        if(fase.equals("COMPLETADO"))this.etapa = TipoFaseProyecto.COMPLETADO;
+        if(fase.equals("DESARROLLO"))this.etapa = TipoFaseProyecto.DESARROLLO;
+        if(fase.equals("PLANEACION"))this.etapa = TipoFaseProyecto.PLANEACION;
+        if(fase.equals("POSTPRODUCCION"))this.etapa = TipoFaseProyecto.POSTPRODUCCION;
+        if(fase.equals("PREPARACION"))this.etapa = TipoFaseProyecto.PREPARACION;
+        if(fase.equals("PRUEBAS"))this.etapa = TipoFaseProyecto.PRUEBAS;
+    }
 }

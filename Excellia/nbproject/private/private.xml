@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/temp/github/TA_LP2_JAVA/Excellia/src/LogicaNegocio/ClienteBL.java</file>
-            <file>file:/C:/temp/github/TA_LP2_JAVA/Excellia/src/AccesoDatos/ClienteDA.java</file>
-            <file>file:/C:/temp/github/TA_LP2_JAVA/Excellia/src/Vista/HomeCliente.java</file>
-            <file>file:/C:/temp/github/TA_LP2_JAVA/Excellia/src/Vista/ModificarEru.java</file>
-            <file>file:/C:/temp/github/TA_LP2_JAVA/Excellia/src/Vista/RegistrarEru.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Vista/RegistrarEru.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Vista/ModificarEru.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Modelo/Eru.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/AccesoDatos/ClienteDA.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Vista/BuscarEruCliente.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/LogicaNegocio/ClienteBL.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Modelo/Requerimiento.java</file>
+            <file>file:/C:/temp/github/github/TA_LP2_JAVA/Excellia/src/Modelo/Proyecto.java</file>
         </group>
     </open-files>
 </project-private>

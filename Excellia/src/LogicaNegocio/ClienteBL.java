@@ -10,6 +10,8 @@ import Modelo.Empresa;
 import Modelo.Eru;
 import Modelo.Objetivo;
 import Modelo.Persona;
+import Modelo.Proyecto;
+import Modelo.Requerimiento;
 import java.util.ArrayList;
 import javax.swing.JTable;
 
@@ -38,5 +40,16 @@ public class ClienteBL {
     }
     public void tabla_eru_busqueda(JTable tabla,String n) {
         clienteDA.tabla_eru_busqueda(tabla,n);
+    }
+    
+    public ArrayList<String> listaTipoRequerimiento(){
+        return clienteDA.listaTipoRequerimiento();
+    }
+    
+    public ArrayList<String> listaPrioridad(){
+        return clienteDA.listaPrioridad();
+    }
+    public ArrayList<Proyecto> listar(String idp){
+        return clienteDA.listar(idp);
     }
 }
